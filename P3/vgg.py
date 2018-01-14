@@ -6,6 +6,7 @@ from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Dropout, Activation, Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
+from keras import backend as K
 
 import sklearn
 from sklearn.model_selection import train_test_split
@@ -39,9 +40,9 @@ def read_input():
         reader = csv.reader(in_file)
         for line in reader:
             # Sample original data. They are all coming from car driving at center of the road.
-            if 'udacity' in line[0] and np.random.rand() > 1.75:
+            if 'udacity' in line[0] and np.random.rand() > 0.05:
                 continue
-            if 'udacity' not in line[0] and np.random.rand() > 1.095:
+            if 'udacity' not in line[0] and np.random.rand() > 0.0095:
                 continue
             filename_prefix = '..\..\data\data\\'
             if 'udacity' in line[0]:
@@ -63,7 +64,8 @@ def read_input():
 def create_model():
     model = Sequential()
     # Pre-processing: Crop images and normalize
-    model.add(Lambda(lambda x : (x / 127.5) - 1.0, input_shape=(160, 320, 3)))
+    model.add(Lambda(lambda x : K.tf.image.rgb_to_grayscale(x), input_shape=(160, 320, 3)))
+    model.add(Lambda(lambda x : (x / 127.5) - 1.0))
     model.add(Cropping2D(cropping=((50, 20), (0,0))))
 
     # First convolutional layer

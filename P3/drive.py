@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import shutil
 import cv2
-
+import tensorflow as tensor
 import numpy as np
 import socketio
 import eventlet
@@ -121,7 +121,7 @@ if __name__ == '__main__':
         print('You are using Keras version ', keras_version,
               ', but the model was built using ', model_version)
 
-    model = load_model(args.model)
+    model = load_model(args.model, custom_objects={'tf':tensor})
 
     if args.image_folder != '':
         print("Creating image folder at {}".format(args.image_folder))
