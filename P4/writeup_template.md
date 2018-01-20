@@ -88,12 +88,23 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
+In order to detect lanes:
+* Binarize the image
+* Create a histogram counting white pixels at each x bin
+* Find local maximax at left and right half of image
+* Consider these local maximax as candidate regions and fit a polynomial by using a sliding window. 
+* If lane is detected at previous frame, use previous image's lane location for starting point for search.
+
 `findLines` and `findLinesFromPrevFit` are responsible from fitting a polynomial to detected lines. 
 
 ![alt text][image5]
 ![alt text][image6]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+
+Once lanes are detected and a polynomial is fitted on lanes, curvature can be calucated by using first and second derivates. Formula is already given at lecture notes. 
+
+Since camera is mounted at the center of vehicle, vehicle center should be the center of image. By using fitted polynomials, center of lane can be calcualted at maximum y index. Difference between center of image (which is vehicle position) and center of lane is considered as location of vehicle with respect to vehicl.
 
 I did this in at `singleImagePipeline` function. 
 
