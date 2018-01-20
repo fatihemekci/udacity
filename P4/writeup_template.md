@@ -22,11 +22,10 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/undistort_output.png "Undistorted"
 [image2]: ./output_images/sobel_binary_image.png "Sobel Result"
 [image3]: ./output_images/sobel_then_perspective.png "Sobel Result With Perspective"
-[image4]: ./output_images/perspective_transform.png "Perspective Transform Output"
+[image4]: ./output_images/perspective_transform_output.png "Perspective Transform Output"
 [image5]: ./output_images/lane_fit.png "Sliding Window Fitted Lane"
 [image6]: ./output_images/lane_with_text.png "Lanes With Info"
 [image6]: ./output_images/lanes.png "Lanes"
-[image7]: ./output_images/perspective_transform.png "Perspective Transform Output"
 [video1]: ./project_video_output.mp4 "Video"
 [video2]: ./harder_challange_video_output.mp4 "Challenge video"
 
@@ -84,7 +83,6 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image4]
 ![alt text][image3]
-![alt text][image7]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
